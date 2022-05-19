@@ -493,6 +493,7 @@ margin-bottom: 9px;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+    
 }
 
 .backdrop{
@@ -502,7 +503,8 @@ margin-bottom: 9px;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.2);
-    transition: opacity 300ms, visibility 300ms;
+    transition: opacity 400ms, visibility 400ms;
+    
 }
 
 .modal{
