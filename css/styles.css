@@ -98,6 +98,8 @@ h1,h2,h3,h4,h5,h6,p{
     line-height: 1.14;
     letter-spacing: 0.02em;
     color: var(--title-text-color);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav{
     display: flex;
@@ -108,6 +110,21 @@ h1,h2,h3,h4,h5,h6,p{
 
 .site-nav .link.current{
     color: var(--accent-color);
+}
+.site-nav .current{
+    position: relative;
+
+}
+.site-nav .current::after{
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-color);
+    bottom: -1px;
+    left: 0;
+    border-radius: 2px;
 }
 
 /* Contacts */
@@ -151,6 +168,7 @@ margin-right: 50px;
     background-repeat: no-repeat;
     background-position: center;
     text-align: center;
+    
 }
 .hero-title {
     margin: 0 auto;
@@ -171,6 +189,9 @@ margin-right: 50px;
     border-radius: 4px;
     min-width: 200px;
     padding: 10px 32px;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     
     font-family: inherit;
     font-weight: 700;
@@ -185,7 +206,7 @@ margin-right: 50px;
 .button:hover,
 .button:focus{
     color: var(--accent-color);
-    background-color: var(--footer-bg-color);
+    background-color: var(--white-text-color);
 }
 /* Our Skills */
 .icon{
@@ -235,6 +256,27 @@ margin-right: 50px;
     justify-content: space-between;
     padding-bottom: 94px;
 }
+.job-list-img{
+    position: relative;
+}
+.job-list-description{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+
+    font-weight: 700;
+    line-height: 1.14;
+    text-transform: uppercase;
+
+    color: var(--white-text-color);
+    background-color: rgba(47, 48, 58, 0.8);
+
+}
 /* Team */
 .team{
     margin: auto;
@@ -276,9 +318,14 @@ margin-right: 50px;
 .social-list{
     display: flex;
     justify-content: center;
+    
 }
 .social-item:not(:last-child){
     margin-right: 10px;
+}
+.social-item{
+    border-radius: 50%;
+    background-color: #FFFFFF;
 }
 .social-link{
     display: flex;
@@ -287,14 +334,18 @@ margin-right: 50px;
     
     width: 44px;
     height: 44px;
+    border-radius: 50%;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icon{
     fill:var(--icon-color);
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-link:hover,
 .social-link:focus {
     background-color: var(--accent-color);
-    border-radius: 50%;
 }
 .social-link:hover .social-icon{
     fill: #FFFFFF;
@@ -321,6 +372,7 @@ margin-right: 50px;
 .clients-item {
     border: 1px solid var(--icon-color);
     border-radius: 4px;
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-item:not(:last-child){
     margin-right: 30px;
@@ -335,7 +387,9 @@ margin-right: 50px;
     height: 92px;
 }
 .clients-icon{
-    fill: var(--icon-color)
+    fill: var(--icon-color);
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-item:hover,
 .clients-item:focus{
@@ -379,6 +433,8 @@ margin-bottom: 9px;
 .footer-contact {
     font-style: normal;
     color: var(--footer-contact-color);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* Join */
 
@@ -405,15 +461,12 @@ margin-bottom: 9px;
 .join-list{
     display: flex;
 }
-.join-item{
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-}
+
 .join-item:not(:last-child){
     margin-right: 10px;
 }
-.join-item:hover,
-.join-item:focus{
+.join-link:hover,
+.join-link:focus{
     background-color: var(--accent-color);
 }
 
@@ -424,6 +477,10 @@ margin-bottom: 9px;
 
     width: 44px;
     height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .join-icon{
@@ -431,7 +488,55 @@ margin-bottom: 9px;
 }
 
 
+/* MODAL */
+.backdrop.is-hidden{
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
 
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: opacity 300ms, visibility 300ms;
+}
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    width: 528px;
+    min-height: 581px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.modal-close-btn{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+}
+.close-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
 /* Portfolio css */
 /* filter */
 .btn-list{
@@ -443,6 +548,9 @@ margin-bottom: 9px;
     margin-right: 8px;
 }
 .btn-filter {
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
     padding: 6px 22px;
     border-radius: 4px;
     border: var(--background-team-color);
@@ -475,6 +583,8 @@ margin-bottom: 9px;
     flex-wrap: wrap;
 }
 .card-item{
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
     width: calc((100% - 60px) / 3);
     margin-right: 30px;
     margin-bottom: 30px;
@@ -483,10 +593,32 @@ margin-bottom: 9px;
     margin-right: 0px;
 }
 .card-item:hover,
-.card-item:focus{
+.card-item:focus {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
 }
+.card-item:hover .card-wrap-text{
+transform: translateY(0);
+}
 
+.card-wrap{
+    position: relative;
+    overflow: hidden;
+}
+
+.card-wrap-text{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 63px 24px;
+
+    font-size: 18px;
+    line-height: 1.56;
+    background-color: rgba(33, 150, 243, 0.9);
+    color: var(--white-text-color);
+}
 
 .card-text{
     width: 370px;
